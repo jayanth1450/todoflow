@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Profile</title>
+    <style>
+      .profile-nav {
+        display: flex;
+        justify-content: flex-start;
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+      }
+      .profile-btn {
+        background: linear-gradient(90deg, #a78bfa 0%, #c4b5fd 100%);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        padding: 0.5rem 1.2rem;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s;
+        text-decoration: none;
+        display: inline-block;
+      }
+      .profile-btn:hover {
+        background: linear-gradient(90deg, #7c3aed 0%, #a78bfa 100%);
+      }
+      body {
+        background: linear-gradient(135deg, #f8f6ff 0%, #e6e0ff 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .profile-container {
+        background: #fff;
+        padding: 1.5rem 2rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 24px rgba(120, 80, 200, 0.1);
+        width: 100%;
+        max-width: 350px;
+        border: 1.5px solid #e0d7fa;
+        box-sizing: border-box;
+      }
+      .profile-title {
+        color: #7c3aed;
+        text-align: center;
+        margin-bottom: 1.2rem;
+      }
+      .profile-field {
+        margin-bottom: 1rem;
+      }
+      .profile-label {
+        color: #7c3aed;
+        font-weight: 500;
+      }
+      .profile-value {
+        color: #4b2996;
+        margin-left: 0.5rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="profile-container">
+      <h2 class="profile-title">Profile</h2>
+      <div class="profile-field">
+        <span class="profile-label">Username:</span>
+        <span class="profile-value">{{ user.username }}</span>
+      </div>
+      <div class="profile-field">
+        <span class="profile-label">Email:</span>
+        <span class="profile-value">{{ user.email }}</span>
+      </div>
+      <div class="profile-field">
+        <span class="profile-label">Subscription Type:</span>
+        <span class="profile-value">{{ user.subscription_type }}</span>
+      </div>
+      <div class="profile-field">
+        <span class="profile-label">Designation:</span>
+        <span class="profile-value">{{ user.designation }}</span>
+      </div>
+      {% if user.designation == 'student' %}
+      <div class="profile-field" id="college-field">
+        <span class="profile-label">College:</span>
+        <span class="profile-value">{{ user.college }}</span>
+      </div>
+      {% endif %} {% if user.designation == 'employee' %}
+      <div class="profile-field" id="company-field">
+        <span class="profile-label">Company:</span>
+        <span class="profile-value">{{ user.company }}</span>
+      </div>
+      {% endif %}
+      <div class="profile-field">
+        <span class="profile-label">Gender:</span>
+        <span class="profile-value">{{ user.gender }}</span>
+      </div>
+      <div
+        class="profile-nav"
+        style="justify-content: center; margin-top: 2rem"
+      >
+        <button class="profile-btn" onclick="window.history.back()">
+          Back
+        </button>
+        <a class="profile-btn" href="/" role="button">Home</a>
+        <form
+          method="POST"
+          action="/logout"
+          style="display: inline; margin-left: 0.5rem"
+        >
+          <button class="profile-btn" type="submit">Logout</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

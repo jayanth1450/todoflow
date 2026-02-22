@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Subscription - Todoflow</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0e6ff; 
+        color: #333;
+      }
+      header {
+        background-color: #e6ccff; 
+        padding: 20px;
+      }
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      h1 {
+        margin: 0;
+        color: #4b0082; 
+        font-style: italic;
+      }
+      .logo-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .logo-image {
+        height: 40px;
+        width: auto;
+      }
+      nav {
+        background-color: transparent;
+        padding: 0;
+        text-align: right;
+      }
+      nav button {
+        background-color: #4b0082; 
+        color: white; 
+        border: none;
+        padding: 10px 20px;
+        margin: 0 5px;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+      }
+      nav button:hover {
+        background-color: #6a0dad;
+      }
+      .content {
+        padding: 20px;
+        text-align: center;
+      }
+      .content h2 {
+        color: #4b0082;
+      }
+      .content p {
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+      .subscription-details {
+        margin-top: 40px;
+        max-width: 800px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+      .subscription-details h3 {
+        color: #4b0082;
+        margin-bottom: 25px;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .package-details {
+        background: linear-gradient(135deg, #b19cd9, #7b68ee);
+        padding: 30px;
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(123, 104, 238, 0.4);
+        color: white;
+        font-weight: 600;
+      }
+      .package-details h4 {
+        margin-top: 0;
+        color: white;
+        font-size: 24px;
+      }
+      .package-details p {
+        margin: 10px 0;
+        font-size: 18px;
+      }
+      .benefits {
+        list-style-type: none;
+        padding: 0;
+        margin: 20px 0;
+      }
+      .benefits li {
+        margin: 10px 0;
+        font-size: 16px;
+      }
+      .subscribe-btn {
+        background-color: #4b0082;
+        color: white;
+        border: none;
+        padding: 15px 30px;
+        font-size: 18px;
+        border-radius: 8px;
+        cursor: pointer;
+        margin-top: 20px;
+      }
+      .subscribe-btn:hover {
+        background-color: #6a0dad;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-container">
+        <div class="logo-title">
+          <img
+            src="/static/img/todo logo.jpg"
+            alt="Todoflow Logo"
+            class="logo-image"
+          />
+          <h1>Todoflow</h1>
+        </div>
+        <nav>
+          <button onclick="window.location.href='/'">Home</button>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      <h2>Premium Subscription</h2>
+      <p>
+        Unlock the full potential of Todoflow with our premium features designed
+        for power users.
+      </p>
+      <div class="subscription-details">
+        <div class="package-details">
+          <h4>Expensive Package</h4>
+          <p>All features with premium support.</p>
+          <p>Price: ₹5000/month</p>
+          <ul class="benefits">
+            <li>Unlimited tasks and projects</li>
+            <li>Advanced analytics and reporting</li>
+            <li>Priority customer support</li>
+            <li>Collaboration features for teams</li>
+            <li>Custom themes and integrations</li>
+            <li>Advanced reminders and notifications</li>
+          </ul>
+          <button
+            class="subscribe-btn"
+            onclick="alert('Subscription successful!')"
+          >
+            Subscribe Now
+          </button>
+        </div>
+      </div>
+    </div>
+    <script>
+      function checkLoginState() {
+        const loggedIn = localStorage.getItem("loggedIn");
+        const loginBtn = document.getElementById("loginBtn");
+        const signupBtn = document.getElementById("signupBtn");
+        if (loggedIn === "true") {
+          if (loginBtn) loginBtn.disabled = true;
+          if (signupBtn) signupBtn.disabled = true;
+        } else {
+          if (loginBtn) loginBtn.disabled = false;
+          if (signupBtn) signupBtn.disabled = false;
+        }
+      }
+
+      checkLoginState();
+
+    </script>
+  </body>
+</html>

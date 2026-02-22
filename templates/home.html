@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Todoflow - Your To-Do List Companion</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0e6ff;
+        color: #333;
+      }
+      header {
+        background-color: #e6ccff; 
+        padding: 20px;
+      }
+      .header-container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      h1 {
+        margin: 0;
+        color: #4b0082; 
+        font-style: italic;
+      }
+      .logo-title {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .logo-image {
+        height: 40px;
+        width: auto;
+      }
+      nav {
+        background-color: transparent;
+        padding: 0;
+        text-align: right;
+      }
+      nav button {
+        background-color: #4b0082; 
+        color: white; 
+        border: none;
+        padding: 10px 20px;
+        margin: 0 5px;
+        cursor: pointer;
+        font-size: 16px;
+        border-radius: 5px;
+      }
+      nav button:hover {
+        background-color: #6a0dad; 
+      }
+      .content {
+        padding: 20px;
+        text-align: center;
+      }
+      .content h2 {
+        color: #4b0082;
+      }
+      .content p {
+        max-width: 600px;
+        margin: 0 auto;
+        line-height: 1.6;
+      }
+      .image-gallery {
+        margin-top: 20px;
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        width: 100%;
+        max-width: 600px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .image-gallery img {
+        width: calc((100% - 40px) / 3);
+        height: 300px;
+        object-fit: cover;
+        border-radius: 12px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease;
+      }
+      .image-gallery img:hover {
+        transform: scale(1.05);
+      }
+      .subscription-packages {
+        margin-top: 40px;
+        max-width: 700px;
+        margin-left: auto;
+        margin-right: auto;
+        text-align: center;
+      }
+      .subscription-packages h3 {
+        color: #4b0082;
+        margin-bottom: 25px;
+        font-size: 28px;
+        font-weight: bold;
+      }
+      .packages {
+        display: flex;
+        justify-content: center;
+        gap: 30px;
+      }
+      .package {
+        background: linear-gradient(135deg, #b19cd9, #7b68ee);
+        padding: 25px 30px;
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(123, 104, 238, 0.4);
+        width: 45%;
+        color: white;
+        font-weight: 600;
+        transition: box-shadow 0.3s ease;
+      }
+      .package:hover {
+        box-shadow: 0 10px 25px rgba(123, 104, 238, 0.7);
+      }
+      .package h4 {
+        margin-top: 0;
+        color: white;
+        font-size: 22px;
+      }
+      .package p {
+        margin: 10px 0;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <div
+      id="toast"
+      style="
+        position: fixed;
+        top: 30px;
+        right: 30px;
+        z-index: 9999;
+        min-width: 180px;
+        background: #7c3aed;
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(124, 58, 237, 0.15);
+        font-size: 1rem;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      "
+    >
+      {% for msg in messages %}
+      <div>{{ msg }}</div>
+      {% endfor %}
+    </div>
+    <script>
+      // Ensure signup and login buttons always redirect
+      document.addEventListener("DOMContentLoaded", function () {
+        var signupBtn = document.getElementById("signupBtn");
+        var loginBtn = document.getElementById("loginBtn");
+        if (signupBtn) {
+          signupBtn.onclick = function () {
+            window.location.href = "/register";
+          };
+        }
+        if (loginBtn) {
+          loginBtn.onclick = function () {
+            window.location.href = "/login";
+          };
+        }
+      });
+      setTimeout(function () {
+        var toast = document.getElementById("toast");
+        if (toast) toast.style.display = "none";
+      }, 3000);
+    </script>
+    <style>
+      @keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes fadeout {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+    </style>
+    {% endif %} {% endwith %}
+    <header>
+      <div class="header-container">
+        <div class="logo-title">
+          <img
+            src="/static/img/todo logo.jpg"
+            alt="Todoflow Logo"
+            class="logo-image"
+          />
+          <h1>Todoflow</h1>
+        </div>
+        <nav>
+          <button>Home</button>
+          <button onclick="window.location.href='sub.html'">
+            Subscription Packages
+          </button>
+          <button onclick="window.location.href='/mytasks'">My Tasks</button>
+          {% if not user %}
+          <button id="signupBtn" onclick="window.location.href='/register'">
+            Signup
+          </button>
+          <button id="loginBtn" onclick="window.location.href='/login'">
+            Login
+          </button>
+          {% endif %}
+          <button onclick="window.location.href='/profile'">Profile</button>
+        </nav>
+      </div>
+    </header>
+    <div class="content">
+      <h2>Welcome to Todoflow</h2>
+      <p>
+        Manage your tasks efficiently with our intuitive to-do list application.
+        Stay organized, boost productivity, and never miss a deadline again.
+        Sign up today and start flowing through your tasks!
+      </p>
+      <div class="image-gallery">
+        <img
+          src="https://images.unsplash.com/photo-1588702547923-7093a6c3ba33?auto=format&fit=crop&w=400&q=80"
+          alt="Todoflow Task List"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1556740749-887f6717d7e4?auto=format&fit=crop&w=400&q=80"
+          alt="Todoflow Productivity"
+        />
+        <img
+          src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=400&q=80"
+          alt="Todoflow Organization"
+        />
+      </div>
+      <div class="subscription-packages">
+        <h3>Subscription Packages</h3>
+        <div class="packages">
+          <div class="package basic">
+            <h4>Basic Package</h4>
+            <p>Essential features to get you started.</p>
+            <p>Price: Free</p>
+          </div>
+          <div class="package expensive">
+            <h4>Expensive Package</h4>
+            <p>All features with premium support.</p>
+            <p>Price: ₹5000/month</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <script>
+      // Simulate user login state using localStorage
+      function checkLoginState() {
+        // Removed disabling logic so buttons are always enabled
+      }
+
+      // Call on page load
+      checkLoginState();
+
+      // For demonstration: simulate login on clicking "Start for Free"
+      // No simulated login on Profile button
+    </script>
+  </body>
+</html>

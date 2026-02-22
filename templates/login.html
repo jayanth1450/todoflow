@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+    <style>
+      body {
+        background: linear-gradient(135deg, #f8f6ff 0%, #e6e0ff 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+      }
+      .login-container {
+        background: #fff;
+        padding: 2rem 2.5rem;
+        border-radius: 16px;
+        box-shadow: 0 4px 24px rgba(120, 80, 200, 0.1);
+        width: 100%;
+        max-width: 350px;
+        border: 1.5px solid #e0d7fa;
+      }
+      .login-container h2 {
+        margin-bottom: 1.5rem;
+        color: #7c3aed;
+        text-align: center;
+      }
+      .form-group {
+        margin-bottom: 1.2rem;
+      }
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        color: #7c3aed;
+      }
+      input[type="text"],
+      input[type="password"] {
+        width: 100%;
+        padding: 0.7rem;
+        border: 1.5px solid #e0d7fa;
+        border-radius: 6px;
+        font-size: 1rem;
+        background: #f8f6ff;
+        color: #4b2996;
+      }
+      input[type="submit"] {
+        width: 100%;
+        padding: 0.7rem;
+        background: linear-gradient(90deg, #a78bfa 0%, #c4b5fd 100%);
+        color: #fff;
+        border: none;
+        border-radius: 6px;
+        font-size: 1rem;
+        cursor: pointer;
+        transition: background 0.2s, box-shadow 0.2s;
+        box-shadow: 0 2px 8px rgba(124, 58, 237, 0.08);
+      }
+      input[type="submit"]:hover {
+        background: linear-gradient(90deg, #7c3aed 0%, #a78bfa 100%);
+      }
+      .login-footer {
+        margin-top: 1rem;
+        text-align: center;
+        font-size: 0.95rem;
+      }
+      .login-footer a {
+        color: #7c3aed;
+        text-decoration: none;
+      }
+      .login-footer a:hover {
+        text-decoration: underline;
+      }
+    </style>
+  </head>
+  <body>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <div
+      id="toast"
+      style="
+        position: fixed;
+        top: 30px;
+        right: 30px;
+        z-index: 9999;
+        min-width: 180px;
+        background: #7c3aed;
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(124, 58, 237, 0.15);
+        font-size: 1rem;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      "
+    >
+      {% for msg in messages %}
+      <div>{{ msg }}</div>
+      {% endfor %}
+    </div>
+    <script>
+      setTimeout(function () {
+        var toast = document.getElementById("toast");
+        if (toast) toast.style.display = "none";
+      }, 3000);
+    </script>
+    <style>
+      @keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes fadeout {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+    </style>
+    {% endif %} {% endwith %}
+    <div class="login-container">
+      <img
+        src="/static/img/illustration.png"
+        alt="Login Illustration"
+        style="
+          display: block;
+          margin: 0 auto 1.2rem auto;
+          max-width: 120px;
+          width: 60%;
+          height: auto;
+        "
+      />
+      <h2>Login</h2>
+      <form method="POST" action="/login">
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="text" id="email" name="email" required autofocus />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" id="password" name="pass" required />
+        </div>
+        <input type="submit" value="Login" />
+      </form>
+      <div class="login-footer">
+        Don't have an account? <a href="/register">Register</a>
+      </div>
+    </div>
+  </body>
+</html>

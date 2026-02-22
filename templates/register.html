@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Registration - Todoflow</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0e6ff;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+      }
+      .registration-form {
+        background-color: #e6ccff;
+        padding: 20px 30px;
+        border-radius: 15px;
+        box-shadow: 0 6px 15px rgba(123, 104, 238, 0.4);
+        width: 360px;
+        box-sizing: border-box;
+      }
+      .registration-form h2 {
+        color: #4b0082;
+        text-align: center;
+        margin: 10px 0 20px 0;
+        font-style: italic;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      .registration-form h2 img {
+        width: 80px;
+        height: auto;
+      }
+      .form-group {
+        margin-bottom: 12px;
+      }
+      label {
+        display: block;
+        margin-bottom: 4px;
+        color: #4b0082;
+        font-weight: 600;
+        font-size: 14px;
+      }
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #b19cd9;
+        border-radius: 6px;
+        font-size: 14px;
+        box-sizing: border-box;
+      }
+      input[type="text"]:disabled {
+        background-color: #ddd;
+      }
+      button {
+        width: 100%;
+        padding: 10px;
+        background-color: #4b0082;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        font-weight: 600;
+        margin-top: 10px;
+      }
+      button:hover {
+        background-color: #6a0dad;
+      }
+    </style>
+  </head>
+  <body>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    <div
+      id="toast"
+      style="
+        position: fixed;
+        top: 30px;
+        right: 30px;
+        z-index: 9999;
+        min-width: 180px;
+        background: #7c3aed;
+        color: #fff;
+        padding: 12px 24px;
+        border-radius: 8px;
+        box-shadow: 0 2px 8px rgba(124, 58, 237, 0.15);
+        font-size: 1rem;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      "
+    >
+      {% for msg in messages %}
+      <div>{{ msg }}</div>
+      {% endfor %}
+    </div>
+    <script>
+      setTimeout(function () {
+        var toast = document.getElementById("toast");
+        if (toast) toast.style.display = "none";
+      }, 3000);
+    </script>
+    <style>
+      @keyframes fadein {
+        from {
+          opacity: 0;
+        }
+        to {
+          opacity: 1;
+        }
+      }
+      @keyframes fadeout {
+        from {
+          opacity: 1;
+        }
+        to {
+          opacity: 0;
+        }
+      }
+    </style>
+    {% endif %} {% endwith %}
+    <form
+      class="registration-form"
+      id="registrationForm"
+      method="POST"
+      action="/register"
+    >
+      <h2>
+        <img src="/static/img/todo logo.jpg" alt="Todoflow Logo" />
+        Register
+      </h2>
+      <div class="form-group">
+        <div class="form-group">
+          <label>Gender</label>
+          <label
+            ><input type="radio" name="gender" value="male" required />
+            Male</label
+          >
+          <label
+            ><input type="radio" name="gender" value="female" /> Female</label
+          >
+          <label
+            ><input type="radio" name="gender" value="other" /> Other</label
+          >
+        </div>
+        <label for="username">Username</label>
+        <input type="text" id="username" name="username" required />
+      </div>
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required />
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input
+          type="password"
+          id="confirm_password"
+          name="confirm_password"
+          required
+        />
+      </div>
+      <div class="form-group">
+        <label for="designation">Designation</label>
+        <select id="designation" name="designation" required>
+          <option value="">Select</option>
+          <option value="student">Student</option>
+          <option value="employee">Employee</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="collegeName">College Name</label>
+        <input type="text" id="collegeName" name="collegeName" disabled />
+      </div>
+      <div class="form-group">
+        <label for="companyName">Company Name</label>
+        <input type="text" id="companyName" name="companyName" disabled />
+      </div>
+      <button type="submit">Register</button>
+    </form>
+
+    <script>
+      const designationSelect = document.getElementById("designation");
+      const collegeInput = document.getElementById("collegeName");
+      const companyInput = document.getElementById("companyName");
+
+      designationSelect.addEventListener("change", function () {
+        if (this.value === "student") {
+          collegeInput.disabled = false;
+          companyInput.disabled = true;
+          companyInput.value = "";
+        } else if (this.value === "employee") {
+          companyInput.disabled = false;
+          collegeInput.disabled = true;
+          collegeInput.value = "";
+        } else {
+          collegeInput.disabled = true;
+          companyInput.disabled = true;
+          collegeInput.value = "";
+          companyInput.value = "";
+        }
+      });
+
+      document;
+    </script>
+  </body>
+</html>
